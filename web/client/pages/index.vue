@@ -1,12 +1,17 @@
 <template>
-  <div>
+  <div id="container">
+    <About />
     <Navbar />
     <QuestionForm />
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  mounted () {
+    this.$bvModal.show('modal-about')
+  }
+}
 </script>
 
 <style lang="scss">

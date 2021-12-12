@@ -3,7 +3,7 @@
     <span>
       The Web Interface for keystroke biometrics researches
     </span>
-    <span id="btn" title="Read more about the research">
+    <span id="btn" title="Read more about the research" @click="$bvModal.show('modal-about')">
       <b-icon-info-square />
     </span>
   </div>
@@ -19,6 +19,7 @@ export default {}
   box-shadow: 0 0 1rem -.5rem black;
   color: $background-color;
   display: flex;
+  font-size: 1.2rem;
   font-weight: 600;
   justify-content: space-between;
 }
