@@ -19,7 +19,7 @@ export default {}
   box-shadow: 0 0 1rem -.5rem black;
   color: $background-color;
   display: flex;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   justify-content: space-between;
 }

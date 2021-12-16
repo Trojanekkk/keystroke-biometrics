@@ -3,6 +3,7 @@
     <About />
     <Navbar />
     <QuestionForm />
+    <Laboratory />
   </div>
 </template>
 

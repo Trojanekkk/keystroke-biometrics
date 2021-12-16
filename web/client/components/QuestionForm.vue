@@ -20,11 +20,11 @@
         <b-form-select v-model="userData.nativeLanguage" :options="availableLanguages" />
       </p>
       <p>
-        Determine yours language skill level <span style="color: red">*</span><br>
+        Determine yours ENGLISH skill level (choose NATIVE if english is your native language) <span style="color: red">*</span><br>
         <b-form-select v-model="userData.skill" :options="skillOptions" />
       </p>
       <p>
-        How frequent you write in english language? <span style="color: red">*</span><br>
+        How frequent do you write in ENGLISH language? <span style="color: red">*</span><br>
         <b-form-select v-model="userData.frequency" :options="frequencyDescription" />
       </p>
       <br>
@@ -60,10 +60,11 @@ export default {
         { value: 1, text: 'B1' },
         { value: 2, text: 'B2' },
         { value: 3, text: 'C1' },
-        { value: 4, text: 'C2' }
+        { value: 4, text: 'C2' },
+        { value: 5, text: 'NATIVE' }
       ],
       frequencyDescription: [
-        { vale: 1, text: 'I do not use an english language on daily basis' },
+        { vale: 1, text: 'I do NOT use an english language on daily basis' },
         { vale: 2, text: 'I use an english language approximatly once a week' },
         { vale: 3, text: 'I use an english language approximatly every 2-3 days' },
         { vale: 4, text: 'I use an english language every day' }
