@@ -1,11 +1,14 @@
 <template>
   <div id="navbar">
     <span>
-      The Web Interface for keystroke biometrics researches
+      Web interface for The Keystroke Biometrics Researches
     </span>
-    <span id="btn" title="Read more about the research" @click="$bvModal.show('modal-about')">
+    <span id="popover-target" class="btn" @click="$bvModal.show('modal-about')">
       <b-icon-info-square />
     </span>
+    <b-popover target="popover-target" triggers="hover" placement="bottom">
+      Read more about the research
+    </b-popover>
   </div>
 </template>
 
@@ -28,13 +31,14 @@ export default {}
   padding: 1rem 1.5rem;
 }
 
-#btn {
+.btn {
   background-color: $accent;
+  color: $background-color;
   cursor: pointer;
   transition: .2s;
 }
 
-#btn:hover {
+.btn:hover {
   background-color: $accent-2
 }
 </style>

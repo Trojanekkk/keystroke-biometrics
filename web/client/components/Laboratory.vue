@@ -17,15 +17,24 @@
       5. Do not correct mistakes (neither just ater you make it either when you finish rewriting), do not worry about them, just continue rewriting.
     </p>
     <h5>Rewrite given text to the field below ({{ archive.length > 2 ? 'english language phase' : 'native language phase' }})</h5>
-    <p
-      v-if="archive.length <= 2"
-    >
-      // TEXT IN NATIVE //
-    </p>
-    <p
-      v-if="archive.length > 2 && archive.length <= 5"
-    >
-      // TEXT IN ENGLISH //
+    <p>
+      <b-skeleton-wrapper :loading="loading">
+        <template #loading>
+          <b-card>
+            <p><b-skeleton /></p>
+            <p><b-skeleton /></p>
+            <p><b-skeleton /></p>
+            <p><b-skeleton /></p>
+            <p><b-skeleton /></p>
+            <b-skeleton width="75%" />
+          </b-card>
+        </template>
+        <b-card
+          style="user-select: none"
+        >
+          {{ archive.length > 3 ? texts[1] : texts[0] }}
+        </b-card>
+      </b-skeleton-wrapper>
     </p>
     <p>
       <b-form-textarea
@@ -80,7 +89,10 @@ export default {
         keydownsDiff: [],
         keyups: []
       },
-      archive: []
+      archive: [],
+      loading: true,
+      textToRewrite: '',
+      texts: ['', '']
     }
   },
   mounted () {
@@ -88,7 +100,8 @@ export default {
   },
   methods: {
     dispatchTexts () {
-      //
+      // Downlod the texts from server and feed texts-variable
+      // Toggle loading-variable
     },
     capturePressing (event) {
       const d = new Date()
