@@ -1,18 +1,37 @@
 <template>
   <div id="laboratory">
-    <div
+    <h5>A few rules reminder</h5>
+    <p>
+      1. Before you start 1st (native language) and 3rd (english language) phases, read once slowly and cerfully the whole text.
+    </p>
+    <p>
+      2. Of course, you can read the text during rewriting, the text will be visible all the experiment.
+    </p>
+    <p>
+      3. Do not be in a hurry with rewriting, try to do it naturally in you normal speed.
+    </p>
+    <p>
+      4. Try to do not make breaks, focus on the rewriting (If you really need a break, take it when you finish 3 steps of 6).
+    </p>
+    <p>
+      5. Do not correct mistakes (neither just ater you make it either when you finish rewriting), do not worry about them, just continue rewriting.
+    </p>
+    <h5>Rewrite given text to the field below ({{ archive.length > 2 ? 'english language phase' : 'native language phase' }})</h5>
+    <p
       v-if="archive.length <= 2"
     >
       // TEXT IN NATIVE //
-    </div>
-    <div
+    </p>
+    <p
       v-if="archive.length > 2 && archive.length <= 5"
     >
       // TEXT IN ENGLISH //
-    </div>
+    </p>
     <p>
       <b-form-textarea
         v-model="results.text"
+        rows="10"
+        :disabled="archive.length > 5"
         @keydown="capturePressing($event)"
         @keyup="captureReleasing($event)"
       />
@@ -22,13 +41,32 @@
     >
       Export
     </div> -->
-    <br>
-    <b-button
-      variant="danger"
-      @click="nextStep()"
+    <p
+      v-if="archive.length < 6"
     >
-      Next step
-    </b-button>
+      <br>
+      <b-button
+        variant="danger"
+        @click="nextStep()"
+      >
+        Next step
+      </b-button>
+    </p>
+    <p
+      v-else
+    >
+      <br>
+      <b-button
+        variant="danger"
+        @click="sendResults()"
+      >
+        Finish the experiment & Send results
+      </b-button>
+    </p>
+    <p>
+      <center>Finished {{ archive.length }} / 6</center>
+      <b-progress style="background-color: white" :value="archive.length" max="6" variant="danger" animated />
+    </p>
   </div>
 </template>
 
@@ -45,12 +83,30 @@ export default {
       archive: []
     }
   },
+  mounted () {
+    this.dispatchTexts()
+  },
   methods: {
+    dispatchTexts () {
+      //
+    },
     capturePressing (event) {
-      this.results.keydowns.push({ c: event.key, t: event.timeStamp })
+      const d = new Date()
+      this.results.keydowns.push({
+        c: event.key,
+        t: event.timeStamp,
+        d: d.getTime(),
+        p: performance.now()
+      })
     },
     captureReleasing (event) {
-      this.results.keyups.push({ c: event.key, t: event.timeStamp })
+      const d = new Date()
+      this.results.keyups.push({
+        c: event.key,
+        t: event.timeStamp,
+        d: d.getTime(),
+        p: performance.now()
+      })
     },
     nextStep () {
       this.archive.push(this.results)
@@ -84,6 +140,7 @@ export default {
   box-shadow: 0 0 1rem -.6rem black;
   margin: 10rem 25%;
   padding: 2rem 3rem;
+  position: relative;
   width: 50%;
 }
 </style>

@@ -6,14 +6,14 @@
     </p>
     <h5>Questionnaire</h5>
     <p />
-    <form>
+    <b-form>
       <p>
         Name / Nickname (for identification) <span style="color: red">*</span><br>
-        <b-form-input v-model="userData.nickname" placeholder="John Doe" />
+        <b-form-input v-model="userData.nickname" placeholder="John Doe" required />
       </p>
       <p>
         E-mail address (if you want to receive the research results later)<br>
-        <b-form-input v-model="userData.email" placeholder="john.doe@example.com" />
+        <b-form-input v-model="userData.email" placeholder="john.doe@example.com" required />
       </p>
       <p>
         Choose your native language <span style="color: red">*</span><br>
@@ -24,16 +24,17 @@
         <b-form-select v-model="userData.skill" :options="skillOptions" />
       </p>
       <p>
-        How frequent do you write in ENGLISH language? <span style="color: red">*</span><br>
+        How frequent do you write in ENGLISH language during last month? <span style="color: red">*</span><br>
         <b-form-select v-model="userData.frequency" :options="frequencyDescription" />
       </p>
       <br>
       <b-button
         variant="danger"
+        @click="submitQuestionnaire(); $router.push('/experiment')"
       >
         Save data & Launch experiment
       </b-button>
-    </form>
+    </b-form>
   </div>
 </template>
 
@@ -64,11 +65,17 @@ export default {
         { value: 5, text: 'NATIVE' }
       ],
       frequencyDescription: [
-        { vale: 1, text: 'I do NOT use an english language on daily basis' },
-        { vale: 2, text: 'I use an english language approximatly once a week' },
-        { vale: 3, text: 'I use an english language approximatly every 2-3 days' },
-        { vale: 4, text: 'I use an english language every day' }
+        { value: 1, text: 'I do NOT use an english language on daily basis' },
+        { value: 2, text: 'I use an english language approximatly once a week' },
+        { value: 3, text: 'I use an english language approximatly every 2-3 days' },
+        { value: 4, text: 'I use an english language every day' }
       ]
+    }
+  },
+  methods: {
+    submitQuestionnaire () {
+      // TODO validation, avoid leaving empty fields
+      this.$store.commit('saveQuestionnaire', this.userData)
     }
   }
 }

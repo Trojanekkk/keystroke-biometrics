@@ -3,14 +3,22 @@
     <About />
     <Navbar />
     <QuestionForm />
-    <Laboratory />
   </div>
 </template>
 
 <script>
 export default {
   mounted () {
+    this.avoidFirefox()
     this.$bvModal.show('modal-about')
+  },
+  methods: {
+    avoidFirefox () {
+      this.$store.commit('saveUserAgent', navigator.userAgent)
+      if (navigator.userAgent.includes('Firefox')) {
+        alert('Firefox browser is not full compatible with the research environment. Please change your browser before you run the experiment. We recommend Google Chrome for that case.\n\nThank you!')
+      }
+    }
   }
 }
 </script>
