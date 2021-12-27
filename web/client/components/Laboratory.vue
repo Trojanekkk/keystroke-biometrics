@@ -14,7 +14,10 @@
       4. Try to do not make breaks, focus on the rewriting (If you really need a break, take it when you finish 3 steps of 6).
     </p>
     <p>
-      5. Do not correct mistakes (neither just ater you make it either when you finish rewriting), do not worry about them, just continue rewriting.
+      5. Do not correct mistakes (neither just ater you make it either when you finish rewriting), do not worry about them, just continue rewriting and jump to the next step.
+    </p>
+    <p>
+      6. Do not forget to send the results.
     </p>
     <h5>Rewrite given text to the field below ({{ archive.length > 2 ? 'english language phase' : 'native language phase' }})</h5>
     <p>
@@ -32,7 +35,7 @@
         <b-card
           style="user-select: none"
         >
-          {{ archive.length > 3 ? texts[1] : texts[0] }}
+          {{ archive.length > 2 ? texts.englishText : texts.nativeText }}
         </b-card>
       </b-skeleton-wrapper>
     </p>
@@ -86,22 +89,27 @@ export default {
       results: {
         text: '',
         keydowns: [],
-        keydownsDiff: [],
         keyups: []
       },
       archive: [],
       loading: true,
       textToRewrite: '',
-      texts: ['', '']
+      texts: {
+        nativeText: '',
+        englishText: ''
+      }
     }
   },
   mounted () {
     this.dispatchTexts()
   },
   methods: {
-    dispatchTexts () {
-      // Downlod the texts from server and feed texts-variable
-      // Toggle loading-variable
+    async dispatchTexts () {
+      const nativeLang = this.$store.state.userData.nativeLanguage
+      const nativeText = await this.$axios.$get('/api/v1/text?lang=' + nativeLang)
+      const englishText = await this.$axios.$get('/api/v1/text?lang=en')
+      this.texts = { nativeText, englishText }
+      this.loading = false
     },
     capturePressing (event) {
       const d = new Date()
@@ -129,6 +137,12 @@ export default {
         keydownsDiff: [],
         keyups: []
       }
+    },
+    async sendResults () {
+      const userAgent = this.$store.state.userAgent
+      const userData = this.$store.state.userData
+      const results = this.archive
+      await this.$axios.$post('/api/v1/results', { userAgent, userData, results })
     },
     exportResults () {
       const text = JSON.stringify(this.results)

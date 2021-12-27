@@ -55,7 +55,7 @@ export default {
         { value: 'gr', text: 'Greek' },
         { value: 'it', text: 'Italian' },
         { value: 'pl', text: 'Polish' },
-        { value: 'gr', text: 'Spanish' }
+        { value: 'es', text: 'Spanish' }
       ],
       skillOptions: [
         { value: 1, text: 'B1' },

@@ -1,8 +1,4 @@
 export default {
-  server: {
-    host: '0.0.0.0',
-    port: 3000
-  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Keystroke Biometrics research platform',
@@ -19,6 +15,8 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+
+  target: 'static',
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
