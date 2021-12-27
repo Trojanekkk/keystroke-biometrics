@@ -1,0 +1,33 @@
+{
+  "name": "keystroke-biometrics",
+  "version": "1.0.0",
+  "description": "The keystroke biometrics researches platform - Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trojanekkk/keystroke-biometrics.git"
+  },
+  "keywords": [
+    "keystroke",
+    "biometrics",
+    "research",
+    "student",
+    "platform",
+    "tests",
+    "web",
+    "application"
+  ],
+  "author": "Wojciech Trojanowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Trojanekkk/keystroke-biometrics/issues"
+  },
+  "homepage": "https://github.com/Trojanekkk/keystroke-biometrics#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2"
+  }
+}
