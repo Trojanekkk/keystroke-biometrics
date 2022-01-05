@@ -17,7 +17,10 @@
       5. Do not correct mistakes (neither just ater you make it either when you finish rewriting), do not worry about them, just continue rewriting and jump to the next step.
     </p>
     <p>
-      6. Do not forget to send the results.
+      6. Do not forget to send the results when you finish.
+    </p>
+    <p>
+      7. Do not refresh the page, all results and data will be erased.
     </p>
     <h5>Rewrite given text to the field below ({{ archive.length > 2 ? 'english language phase' : 'native language phase' }})</h5>
     <p>
@@ -105,6 +108,7 @@ export default {
   },
   methods: {
     async dispatchTexts () {
+      if (this.$store.state.userData === null) return
       const nativeLang = this.$store.state.userData.nativeLanguage
       const nativeText = await this.$axios.$get('/api/v1/text?lang=' + nativeLang)
       const englishText = await this.$axios.$get('/api/v1/text?lang=en')
@@ -134,7 +138,6 @@ export default {
       this.results = {
         text: '',
         keydowns: [],
-        keydownsDiff: [],
         keyups: []
       }
     },
@@ -143,19 +146,10 @@ export default {
       const userData = this.$store.state.userData
       const results = this.archive
       await this.$axios.$post('/api/v1/results', { userAgent, userData, results })
-    },
-    exportResults () {
-      const text = JSON.stringify(this.results)
-      const filename = 'nativePhase'
-      const el = document.createElement('a')
-
-      el.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(text))
-      el.setAttribute('download', filename)
-      el.style.display = 'none'
-
-      document.body.appendChild(el)
-      el.click()
-      document.body.removeChild(el)
+        .then((res) => {
+          this.$store.commit('updateDeliveryStatus', res)
+          this.$router.push('/summary')
+        })
     }
   }
 }
