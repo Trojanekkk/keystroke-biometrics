@@ -1,21 +1,18 @@
 const bodyParser = require('body-parser')
+const cors = require('cors')
+const dotenv = require('dotenv')
 const express = require('express')
-const { MongoClient } = require('mongodb')
 const path = require('path')
 
-const app = express()
-const port = 3000
-const db_uri = 'mongodb://localhost:27017'
+// Init dotenv
+dotenv.config()
 
-// Connect to the DB
-const client = new MongoClient(db_uri)
+// Init app
+const app = express()
 
 // CORS
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');  
-next();
-})
+app.use(cors())
+app.options('*', cors())
 
 // Set RootDir
 app.use('/', express.static(path.join(__dirname, '../client/dist')))
@@ -24,35 +21,11 @@ app.use('/', express.static(path.join(__dirname, '../client/dist')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// Define controllers
-// Get text from db in specified lang
-async function getText () {
-  try {
-    await client.connect()
-
-    await client.db('admin').command({ ping: 1 })
-    console.log('Connected to the DB')
-  } finally {
-    await client.close()
-  }
-}
-getText().catch(console.dir)
-// Save results into database
-
-// Define routes
-const API_ROOT = '/api/v1'
-
-app.get(API_ROOT + '/text', (req, res) => {
-  res.send(`This is text in ${req.query.lang} language`)
-})
-
-app.post(API_ROOT + '/results', (req, res) => {
-  console.log(req.body)
-  res.send(true)
-  // if error in controller, return false
-})
+// Import routes
+require('./routes/text.routes')(app)
+require('./routes/result.routes')(app)
 
 // Run server
-app.listen(port, () => {
-  console.log(`Server is running: http://localhost:${port}`)
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running: http://localhost:${process.env.PORT}`)
 })
