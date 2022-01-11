@@ -14,7 +14,7 @@ exports.getText = async (req, res) => {
 
   const texts = JSON.parse(fs.readFileSync(process.env.DATA_PATH + process.env.TEXTS_FILENAME))
 
-  const index = texts.findIndex((text) => text.lang === lang)
+  const index = texts.findIndex(text => text.lang === lang)
 
   if (index === -1)
     return res.status(500).send('Internal error')
@@ -23,5 +23,12 @@ exports.getText = async (req, res) => {
 }
 
 exports.getAvailableLanguages = async (req, res) => {
-  // Retrun available languages
+  if (!fs.existsSync(process.env.DATA_PATH + process.env.TEXTS_FILENAME))
+    return res.status(500).send('Internal error')
+  
+  const texts = JSON.parse(fs.readFileSync(process.env.DATA_PATH + process.env.TEXTS_FILENAME))
+
+  const languages = texts.map(text => text.lang)
+
+  res.send(languages)
 }

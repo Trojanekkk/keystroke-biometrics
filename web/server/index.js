@@ -3,6 +3,7 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 const express = require('express')
 const path = require('path')
+const initDependencies = require('./config/init')
 
 // Init dotenv
 dotenv.config()
@@ -24,6 +25,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // Import routes
 require('./routes/text.routes')(app)
 require('./routes/result.routes')(app)
+
+// Initialize application dependencies
+initDependencies.initStorage()
 
 // Run server
 app.listen(process.env.PORT, () => {
