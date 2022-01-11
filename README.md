@@ -8,18 +8,21 @@ The application consists of three main parts:
 1. Web Interface
     1. client (frontend)
     2. server (backend, API)
-2. Database
-3. Data Analyzer
+2. Data Analyzer
 
-## Usage
+## Prerequsities
+1. Node.js 16.13.1 and npm
+3. Python 3.8.10
+
+## Setup in local environment
 ### Backend
 For backend setup read README.md in web/server directory
 
 ### Frontend
 For frontend setup read README.md in web/client directory
 
-### Database
-For database setup read README.md in data directory
+### Data
+Data are written to the 'data' directory in a few seperate .json files.
 
 ### Data Analyzer
 1. Install Python 3.8+
