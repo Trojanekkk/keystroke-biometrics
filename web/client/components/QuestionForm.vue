@@ -72,10 +72,19 @@ export default {
       ]
     }
   },
+  created () {
+    this.retriveAvailableLanguages()
+  },
   methods: {
     submitQuestionnaire () {
       // TODO validation, avoid leaving empty fields
       this.$store.commit('saveQuestionnaire', this.userData)
+    },
+    async retriveAvailableLanguages () {
+      await this.$axios.get('/api/v1/text/languages')
+        .then((res) => {
+          this.availableLanguages = res.data
+        })
     }
   }
 }

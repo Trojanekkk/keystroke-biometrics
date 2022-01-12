@@ -1,4 +1,7 @@
 export default {
+  server: {
+    port: 3001
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Keystroke Biometrics research platform',
@@ -54,7 +57,9 @@ export default {
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://localhost:3000'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

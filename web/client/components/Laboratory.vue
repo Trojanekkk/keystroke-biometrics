@@ -51,11 +51,6 @@
         @keyup="captureReleasing($event)"
       />
     </p>
-    <!-- <div
-      @click="exportResults()"
-    >
-      Export
-    </div> -->
     <p
       v-if="archive.length < 6"
     >
@@ -64,7 +59,7 @@
         variant="danger"
         @click="nextStep()"
       >
-        Next step
+        Next phase
       </b-button>
     </p>
     <p
@@ -79,7 +74,7 @@
       </b-button>
     </p>
     <p>
-      <center>Finished {{ archive.length }} / 6</center>
+      <center>Finished phases {{ archive.length }} / 6</center>
       <b-progress style="background-color: white" :value="archive.length" max="6" variant="danger" animated />
     </p>
   </div>
@@ -108,7 +103,7 @@ export default {
   },
   methods: {
     async dispatchTexts () {
-      if (this.$store.state.userData === null) return
+      if (this.$store.state.userData === null) { return }
       const nativeLang = this.$store.state.userData.nativeLanguage
       const nativeText = await this.$axios.$get('/api/v1/text?lang=' + nativeLang)
       const englishText = await this.$axios.$get('/api/v1/text?lang=en')
@@ -145,8 +140,9 @@ export default {
       const userAgent = this.$store.state.userAgent
       const userData = this.$store.state.userData
       const results = this.archive
-      await this.$axios.$post('/api/v1/results', { userAgent, userData, results })
+      await this.$axios.$post('/api/v1/result', { userAgent, userData, results })
         .then((res) => {
+          this.$store.commit('saveUserResults', this.archive)
           this.$store.commit('updateDeliveryStatus', res)
           this.$router.push('/summary')
         })

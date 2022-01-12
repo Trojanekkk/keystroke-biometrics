@@ -1,7 +1,8 @@
 export const state = () => ({
   deliveryStatus: null,
   userAgent: '',
-  userData: null
+  userData: null,
+  userResults: null
 })
 
 export const mutations = {
@@ -10,6 +11,9 @@ export const mutations = {
   },
   saveUserAgent (state, userAgent) {
     state.userAgent = userAgent
+  },
+  saveUserResults (state, userResults) {
+    state.userResults = userResults
   },
   saveQuestionnaire (state, userData) {
     state.userData = userData

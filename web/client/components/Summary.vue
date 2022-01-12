@@ -4,9 +4,10 @@
     <p>
       {{ text }}
     </p>
-        <p>
+    <p>
       <br>
       <b-button
+        v-if="!delivered"
         variant="danger"
         @click="sendResults()"
       >
@@ -42,7 +43,7 @@ export default {
       if (this.delivered === false) {
         this.text = 'Some problem with the server occured, please retry or export the results and send them on email: <a href="mailto:W.Trojan27@gmail.com">W.Trojan27@gmail.comx`</a>'
       } else if (this.delivered === null) {
-        this.text = 'Some unrecognized problem occured, please retry or export the results and send them on email: <mailto>W.Trojan27@gmail.com<mailto>'
+        this.text = 'Some unrecognized problem occured, please retry or export the results and send them on email: W.Trojan27@gmail.com'
       } else {
         this.text = 'The results of the experiment have been received by the server.'
       }
