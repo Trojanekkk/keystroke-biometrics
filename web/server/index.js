@@ -2,8 +2,9 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const express = require('express')
-const path = require('path')
 const initDependencies = require('./config/init')
+const log = require('log-beautify')
+const path = require('path')
 
 // Init dotenv
 dotenv.config()
@@ -31,5 +32,5 @@ initDependencies.initStorage()
 
 // Run server
 app.listen(process.env.PORT, () => {
-  console.log(`Server is running: http://localhost:${process.env.PORT}`)
+  log.success(`Server is running: http://localhost:${process.env.PORT}`)
 })

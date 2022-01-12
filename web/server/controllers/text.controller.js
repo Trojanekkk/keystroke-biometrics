@@ -28,7 +28,12 @@ exports.getAvailableLanguages = async (req, res) => {
   
   const texts = JSON.parse(fs.readFileSync(process.env.DATA_PATH + process.env.TEXTS_FILENAME))
 
-  const languages = texts.map(text => text.lang)
+  const languages = texts.map(text => {
+    return {
+      "text": text.title,
+      "value": text.lang
+    }
+  })
 
   res.send(languages)
 }

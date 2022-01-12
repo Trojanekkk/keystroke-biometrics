@@ -5,7 +5,10 @@ exports.textSchema = Joi.object({
     .required(),
 
   lang: Joi.string()
-    .max(2)
-    .min(2)
+    .length(2)
+    .required(),
+
+  title: Joi.string()
+    .max(50)
     .required()
 })
