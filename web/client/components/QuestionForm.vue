@@ -6,57 +6,79 @@
     </p>
     <h5>Questionnaire</h5>
     <p />
-    <b-form>
-      <p>
-        Name / Nickname (for identification) <span style="color: red">*</span><br>
-        <b-form-input v-model="userData.nickname" placeholder="John Doe" required />
-      </p>
-      <p>
-        E-mail address (if you want to receive the research results later)<br>
-        <b-form-input v-model="userData.email" placeholder="john.doe@example.com" required />
-      </p>
-      <p>
-        Choose your native language <span style="color: red">*</span><br>
-        <b-form-select v-model="userData.nativeLanguage" :options="availableLanguages" />
-      </p>
-      <p>
-        Determine yours ENGLISH skill level (choose NATIVE if english is your native language) <span style="color: red">*</span><br>
-        <b-form-select v-model="userData.skill" :options="skillOptions" />
-      </p>
-      <p>
-        How frequent do you write in ENGLISH language during last month? <span style="color: red">*</span><br>
-        <b-form-select v-model="userData.frequency" :options="frequencyDescription" />
-      </p>
-      <br>
-      <b-button
-        variant="danger"
-        @click="submitQuestionnaire(); $router.push('/experiment')"
-      >
-        Save data & Launch experiment
-      </b-button>
-    </b-form>
+    <ValidationObserver v-slot="{ invalid }">
+      <b-form @submit.prevent="submitQuestionnaire()">
+        <p>
+          Name / Nickname (for identification) <span style="color: red">*</span><br>
+          <ValidationProvider v-slot="{ errors }" rules="required|alpha_spaces|max:100">
+            <b-form-input v-model="userData.nickname" placeholder="John Doe" />
+            <span class="vee-error">{{ errors[0] }}</span>
+          </ValidationProvider>
+        </p>
+        <p>
+          E-mail address (if you want to receive the research results later)<br>
+          <ValidationProvider v-slot="{ errors }" rules="email|max:100">
+            <b-form-input v-model="userData.email" placeholder="john.doe@example.com" />
+            <span class="vee-error">{{ errors[0] }}</span>
+          </ValidationProvider>
+        </p>
+        <p>
+          Choose your native language <span style="color: red">*</span><br>
+          <ValidationProvider v-slot="{ errors }" name="userData.nativeLanguage" rules="required">
+            <b-form-select v-model="userData.nativeLanguage" :options="availableLanguages" />
+            <span class="vee-error">{{ errors[0] }}</span>
+          </ValidationProvider>
+        </p>
+        <p>
+          Determine yours ENGLISH skill level (choose NATIVE if english is your native language) <span style="color: red">*</span><br>
+          <ValidationProvider v-slot="{ errors }" name="userData.skill" rules="required">
+            <b-form-select v-model="userData.skill" :options="skillOptions" />
+            <span class="vee-error">{{ errors[0] }}</span>
+          </ValidationProvider>
+        </p>
+        <p>
+          How frequent do you write in ENGLISH language during last month? <span style="color: red">*</span><br>
+          <ValidationProvider v-slot="{ errors }" name="userData.frequency" rules="required">
+            <b-form-select v-model="userData.frequency" :options="frequencyDescription" />
+            <span class="vee-error">{{ errors[0] }}</span>
+          </ValidationProvider>
+        </p>
+        <br>
+        <span id="popover-target-2" style="display: inline-block">
+          <b-button
+            :disabled="invalid"
+            variant="danger"
+            type="submit"
+          >
+            Save data & Launch experiment
+          </b-button>
+        </span>
+        <b-popover target="popover-target-2" triggers="hover" placement="bottom" :disabled="!invalid" :hide="!invalid">
+          Fill required fields before the submission
+        </b-popover>
+      </b-form>
+    </ValidationObserver>
   </div>
 </template>
 
 <script>
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
+
 export default {
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
   data () {
     return {
       userData: {
         nickname: '',
         email: '',
         nativeLanguage: '',
-        skill: 0,
-        frequency: 0
+        skill: null,
+        frequency: null
       },
-      availableLanguages: [
-        { value: 'en', text: 'English' },
-        { value: 'de', text: 'German' },
-        { value: 'gr', text: 'Greek' },
-        { value: 'it', text: 'Italian' },
-        { value: 'pl', text: 'Polish' },
-        { value: 'es', text: 'Spanish' }
-      ],
+      availableLanguages: [],
       skillOptions: [
         { value: 1, text: 'B1' },
         { value: 2, text: 'B2' },
@@ -79,6 +101,7 @@ export default {
     submitQuestionnaire () {
       // TODO validation, avoid leaving empty fields
       this.$store.commit('saveQuestionnaire', this.userData)
+      this.$router.push('/experiment')
     },
     async retriveAvailableLanguages () {
       await this.$axios.get('/api/v1/text/languages')
@@ -97,5 +120,11 @@ export default {
   margin: 10rem 25%;
   padding: 2rem 3rem;
   width: 50%;
+}
+
+.vee-error {
+  color: $accent;
+  font-size: .8rem;
+  font-weight: 300;
 }
 </style>
