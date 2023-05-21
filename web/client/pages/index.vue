@@ -12,6 +12,7 @@ export default {
   mounted () {
     this.avoidFirefox()
     this.$bvModal.show('modal-about')
+    console.log(this.$axios.defaults.baseURL)
   },
   methods: {
     avoidFirefox () {

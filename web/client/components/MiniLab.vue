@@ -37,8 +37,8 @@
         <br>
         <b-button
           variant="danger"
-          @click="sendResults()"
           :disabled="invalid"
+          @click="sendResults()"
         >
           Finish the experiment & Send results
         </b-button>
