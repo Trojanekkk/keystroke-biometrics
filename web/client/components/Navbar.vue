@@ -1,7 +1,7 @@
 <template>
   <div id="navbar">
     <span>
-      Web platform for The Keystroke Biometrics Researches
+      The web platform for Keystroke Biometrics Research
     </span>
     <span id="popover-target" class="btn" @click="$bvModal.show('modal-about')">
       <b-icon-info-square />
