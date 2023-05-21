@@ -4,6 +4,8 @@
   "description": "The keystroke biometrics researches platform - Backend",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon .",
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
