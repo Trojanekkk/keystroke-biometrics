@@ -1,10 +1,10 @@
-module.exports = app => {
-    const result = require('../controllers/result.controller')
+module.exports = (app) => {
+  const result = require("../controllers/result.controller");
 
-    var router = require('express').Router()
+  var router = require("express").Router();
 
-    // Add new result
-    router.post('/', result.addResult)
+  // Add new result
+  router.post("/", result.addResult);
 
-    app.use(process.env.API_ROOT + '/result', router)
-}
+  app.use(process.env.API_ROOT + "/result", router);
+};

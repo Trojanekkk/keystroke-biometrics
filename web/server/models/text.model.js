@@ -1,14 +1,9 @@
-const Joi = require('joi')
+const Joi = require("joi");
 
 exports.textSchema = Joi.object({
-  body: Joi.string()
-    .required(),
+  body: Joi.string().required(),
 
-  lang: Joi.string()
-    .length(2)
-    .required(),
+  lang: Joi.string().length(2).required(),
 
-  title: Joi.string()
-    .max(50)
-    .required()
-})
+  title: Joi.string().max(50).required(),
+});
