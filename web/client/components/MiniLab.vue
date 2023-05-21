@@ -12,16 +12,21 @@
         </ValidationProvider>
       </p>
       <p>
+        <b-form-input :disabled="true">
+          moja uczelnia jest spoko i studiuje na niej sporo studentów
+        </b-form-input>
+      </p>
+      <p>
         <b-form-textarea
           v-model="results.text"
           rows="10"
-          :disabled="archive.length > 0"
+          :disabled="archive.length > 2"
           @keydown="capturePressing($event)"
           @keyup="captureReleasing($event)"
         />
       </p>
       <p
-        v-if="archive.length < 1"
+        v-if="archive.length < 3"
       >
         <br>
         <b-button
@@ -44,9 +49,9 @@
         </b-button>
       </p>
       <p>
-        <center>Finished steps {{ archive.length }} / 1</center>
+        <center>Finished steps {{ archive.length }} / 3</center>
         <br>
-        <b-progress style="background-color: white" :value="archive.length" max="1" variant="danger" animated />
+        <b-progress style="background-color: white" :value="archive.length" max="3" variant="danger" animated />
       </p>
     </ValidationObserver>
   </div>
