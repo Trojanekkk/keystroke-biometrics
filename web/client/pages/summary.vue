@@ -3,7 +3,7 @@
     <About />
     <Navbar />
     <Summary />
-    <Footer />
+    <Footer style="position: absolute; bottom: 0; left: 50%; transform: translate(-50%, 0);" />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="summary">
-    <h5>Thank you for the partcipation!</h5>
+    <h5>Thank you for your partcipation!</h5>
     <p>
       {{ text }}
     </p>
@@ -41,11 +41,11 @@ export default {
     checkDeliveryConfirmation () {
       this.delivered = this.$store.state.deliveryStatus
       if (this.delivered === false) {
-        this.text = 'Some problem with the server occured, please retry or export the results and send them on email: <a href="mailto:W.Trojan27@gmail.com">W.Trojan27@gmail.comx`</a>'
+        this.text = 'Some problem with the server occured, please retry or export the results and send them manually to me via email: W.Trojan27@gmail.com. Thank you so much!'
       } else if (this.delivered === null) {
-        this.text = 'Some unrecognized problem occured, please retry or export the results and send them on email: W.Trojan27@gmail.com'
+        this.text = 'Some unrecognized problem occured, please retry or export the results and send them manually to me via email: W.Trojan27@gmail.com. Thank you so much!'
       } else {
-        this.text = 'The results of the experiment have been received by the server.'
+        this.text = 'The results of the experiment have been received by the server. Thank you so much! :)'
       }
     },
     exportResults () {

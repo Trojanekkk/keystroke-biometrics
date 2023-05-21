@@ -3,7 +3,7 @@
     <About />
     <Navbar />
     <QuestionForm />
-    <Footer />
+    <Footer style="bottom: 0" />
   </div>
 </template>
 
