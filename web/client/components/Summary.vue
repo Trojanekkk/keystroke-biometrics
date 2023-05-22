@@ -8,7 +8,7 @@
       <br>
       <b-button
         v-if="!delivered"
-        variant="danger"
+        variant="success"
         @click="sendResults()"
       >
         Retry
@@ -17,7 +17,7 @@
     <p>
       <br>
       <b-button
-        variant="danger"
+        variant="success"
         @click="exportResults()"
       >
         Export results

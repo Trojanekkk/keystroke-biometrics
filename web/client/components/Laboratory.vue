@@ -40,7 +40,7 @@
         <b-card
           style="user-select: none"
         >
-          {{ archive.length > 2 ? texts.englishText : texts.nativeText }}
+          {{ archive.length > 3 ? texts.englishText : texts.nativeText }}
         </b-card>
       </b-skeleton-wrapper>
     </p>
@@ -58,7 +58,7 @@
     >
       <br>
       <b-button
-        variant="danger"
+        variant="success"
         @click="nextStep()"
       >
         Next step
@@ -69,7 +69,7 @@
     >
       <br>
       <b-button
-        variant="danger"
+        variant="success"
         @click="sendResults()"
       >
         Finish the experiment & Send results
@@ -78,7 +78,7 @@
     <p>
       <center>Finished steps {{ archive.length }} / 8</center>
       <br>
-      <b-progress style="background-color: white" :value="archive.length" max="8" variant="danger" animated />
+      <b-progress style="background-color: white" :value="archive.length" max="8" variant="success" animated />
     </p>
   </div>
 </template>

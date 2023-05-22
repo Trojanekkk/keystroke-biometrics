@@ -3,11 +3,11 @@
     id="modal-about"
     title="About the research"
     centered
-    header-bg-variant="danger"
+    header-bg-variant="success"
     header-text-variant="light"
     ok-only
     ok-title="Close"
-    ok-variant="danger"
+    ok-variant="success"
     size="xl"
   >
     <div id="about_body">

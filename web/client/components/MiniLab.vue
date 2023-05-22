@@ -50,7 +50,7 @@
       >
         <br>
         <b-button
-          variant="danger"
+          variant="success"
           @click="nextStep()"
         >
           Next step
@@ -61,7 +61,7 @@
       >
         <br>
         <b-button
-          variant="danger"
+          variant="success"
           :disabled="invalid"
           @click="sendResults()"
         >
@@ -71,7 +71,7 @@
       <p>
         <center>Finished steps {{ archive.length }} / {{ numberOfSteps }}</center>
         <br>
-        <b-progress style="background-color: white" :value="archive.length" :max="numberOfSteps" variant="danger" animated />
+        <b-progress style="background-color: white" :value="archive.length" :max="numberOfSteps" variant="success" animated />
       </p>
     </ValidationObserver>
   </div>

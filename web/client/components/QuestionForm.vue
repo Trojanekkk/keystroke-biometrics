@@ -118,7 +118,7 @@
         </p>
         <br>
         <span id="popover-target-2" style="display: inline-block">
-          <b-button :disabled="invalid" variant="danger" type="submit">
+          <b-button :disabled="invalid" variant="success" type="submit">
             Save data & Launch experiment
           </b-button>
         </span>
