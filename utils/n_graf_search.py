@@ -11,6 +11,14 @@ def find_n_grafs (text):
             else:
                 n_grafs[digraf] = 1
 
-    return dict(sorted(n_grafs.items(), key=lambda item: -item[1]))
+    # return dict(n for n in sorted(n_grafs.items(), key=lambda item: -item[1]))
+    return dict(n for n in sorted(n_grafs.items(), key=lambda item: -item[1]) if n[1] > 2)
 
-print(find_n_grafs(sys.argv[1]))
+digrafs = [find_n_grafs(txt) for txt in sys.argv[1:]]
+
+common = set(digrafs[0])
+for s in digrafs:
+    common = common.intersection((s))
+
+for i, txt in enumerate(digrafs):
+    print(f'txt{i + 1}: ' + str(sorted(f'{x} x {txt[x]}' for x in txt if x in common)))

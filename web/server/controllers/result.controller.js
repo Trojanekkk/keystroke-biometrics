@@ -2,6 +2,7 @@ const { resultSchemaValidation } = require("../models/result.model");
 const fs = require("fs");
 
 exports.addResult = async (req, res) => {
+  res.send("Received all results");
   const result = req.body;
 
   if (!(await resultSchemaValidation(result)))
